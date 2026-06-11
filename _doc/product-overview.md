@@ -7,7 +7,7 @@
 
 | Field | Value |
 |---|---|
-| **Working Name** | ComplianceIQ *(final name to be confirmed)* |
+| **Product Name** | ComplianceIQ |
 | **Client** | Allied Financial Insurance |
 | **Category** | Regulatory Compliance Management Platform |
 | **Tagline** | Automate employee compliance — from document upload to audit-ready export. |
