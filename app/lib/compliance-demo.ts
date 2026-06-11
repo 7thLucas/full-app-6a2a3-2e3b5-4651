@@ -50,7 +50,7 @@ export const departments: Department[] = ["All", "Sales", "Compliance"];
 export const demoAccounts: DemoAccount[] = [
   {
     role: "HR",
-    name: "Sarah Mitchell",
+    name: "Penny Goldberg",
     email: "hr@insureco.demo",
     password: "Demo@123",
     department: "All",
