@@ -66,31 +66,3 @@ export async function apiGet<T = any>(
     params,
   });
 }
-
-export async function apiPost<T = any>(
-  path: string,
-  data?: Record<string, any> | FormData,
-): Promise<ApiResponse<T>> {
-  return apiRequest<T>(path, {
-    method: "POST",
-    data,
-  });
-}
-
-export async function apiPut<T = any>(
-  path: string,
-  data?: Record<string, any>,
-): Promise<ApiResponse<T>> {
-  return apiRequest<T>(path, {
-    method: "PUT",
-    data,
-  });
-}
-
-export async function apiDelete<T = any>(
-  path: string,
-): Promise<ApiResponse<T>> {
-  return apiRequest<T>(path, {
-    method: "DELETE",
-  });
-}

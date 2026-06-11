@@ -38,6 +38,7 @@
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cookie": "^1.1.1",
     "dotenv": "^17.2.3",
     "express": "^4.21.2",
     "isbot": "^4",
@@ -55,7 +56,9 @@
   "devDependencies": {
     "@react-router/dev": "^7.0.0",
     "@react-router/remix-routes-option-adapter": "^7.6.2",
+    "@types/cookie": "^0.6.0",
     "@types/express": "^5.0.5",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.10.1",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",

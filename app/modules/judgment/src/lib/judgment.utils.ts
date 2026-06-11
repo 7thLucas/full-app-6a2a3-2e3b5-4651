@@ -353,16 +353,13 @@ export function validateConfigPayload(payload: Record<string, any>) {
         throw new Error(`Field '${key}' schema must be an object.`);
       }
       const p = prop as any;
-      const validTypes = ["string", "number", "boolean", "array"];
+      const validTypes = ["string", "number", "boolean", "array", "integer", "object"];
       if (!validTypes.includes(p.type)) {
         throw new Error(`Field '${key}' type must be one of: string, number, boolean, array.`);
       }
-      if (p.type === "array") {
-        if (!p.items || typeof p.items !== "object" || p.items.type !== "string") {
-          throw new Error(`Field '${key}' must have items of type string.`);
-        }
-        if (!p["x-ui"] || p["x-ui"].widget !== "file") {
-          throw new Error(`Field '${key}' array type is only supported for multiple file uploads. Please set UI widget to 'file'.`);
+      if (p.type === "array" && p["x-ui"]?.widget === "file") {
+        if (!p.items || typeof p.items !== "object") {
+          throw new Error(`Field '${key}' file array must have an items definition.`);
         }
       }
       if (p["x-ui"] && p["x-ui"].widget !== "file") {
@@ -440,13 +437,12 @@ export function normalizeGeneratedConfigPayload(payload: Record<string, any>) {
       }
     }
 
-    if (!["string", "number", "boolean", "array"].includes(String(prop.type))) {
+    if (!["string", "number", "boolean", "array", "integer", "object"].includes(String(prop.type))) {
       prop.type = "string";
     }
 
-    if (prop.type === "array") {
+    if (prop.type === "array" && widget === "file") {
       prop.items = prop.items && typeof prop.items === "object" ? prop.items : { type: "string" };
-      prop["x-ui"] = { widget: "file" };
     }
 
     normalizedProperties[key] = prop;

@@ -25,7 +25,7 @@ export async function handleUpload(req: Request, res: Response): Promise<void> {
 
 export async function handleDelete(req: Request, res: Response): Promise<void> {
   try {
-    const result = await deleteFile({ filename: String(req.params.filename), keyspace: process.env._KEYSPACE || "" });
+    const result = await deleteFile({ filename: req.params.filename as string, keyspace: process.env._KEYSPACE || "" });
     res.json({ success: true, data: result.data });
   } catch (e: any) {
     res.status(500).json({ success: false, message: e.message });

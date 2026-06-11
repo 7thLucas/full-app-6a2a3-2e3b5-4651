@@ -102,11 +102,6 @@ export async function runSeeds(): Promise<void> {
       await seed.run();
     }
 
-    // Run compliance domain seeds
-    const { seedComplianceRequirements } = await import("~/compliance/seeds/compliance.seed");
-    logger.info("Running compliance requirements seed...");
-    await seedComplianceRequirements();
-
     logger.info("✅ All seed operations completed successfully");
   } catch (error) {
     logger.error("❌ Seed operations failed:", error);

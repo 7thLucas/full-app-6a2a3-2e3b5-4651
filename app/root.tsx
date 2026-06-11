@@ -13,7 +13,6 @@ import stylesheet from "~/tailwind.css?url";
 import { useEffect } from "react";
 import { ThemeProvider } from "next-themes";
 import { ConfigurablesProvider, ConfigurablesCSSBridge } from "~/modules/configurables";
-import { AuthProvider } from "~/modules/authentication";
 import { GlobalError } from "./error";
 
 function ErrorReporter({ error }: { error: any }) {
@@ -37,7 +36,7 @@ export function ErrorBoundary() {
   const error = useRouteError();
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta
@@ -47,7 +46,7 @@ export function ErrorBoundary() {
         <title>Oops! An Error Occurred</title>
         <Links />
       </head>
-      <body suppressHydrationWarning>
+      <body>
         <ErrorReporter error={error} />
         <GlobalError error={error} />
         <Scripts />
@@ -85,22 +84,20 @@ function RouteChangeReporter() {
 
 export default function App() {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body suppressHydrationWarning>
+      <body>
         <RouteChangeReporter />
         <ConfigurablesProvider>
           <ConfigurablesCSSBridge />
-          <AuthProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <Outlet />
-            </ThemeProvider>
-          </AuthProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <Outlet />
+          </ThemeProvider>
         </ConfigurablesProvider>
         <ScrollRestoration />
         <Scripts />
