@@ -2,6 +2,22 @@
 - Purpose: Full-stack web application with RBAC, modular features, and admin dashboards.
 - High-level system type: Admin Dashboard / SaaS Base Template
 
+# Current Application — Allied Financial Compliance Portal
+The template currently hosts an **AI-driven compliance portal** for "Allied Financial Insurance". HR publishes compliance SOP/configs per department; employees submit evidence (a note + an uploaded certificate/form file); an AI judgment engine evaluates each submission and returns a verdict, which HR reviews.
+
+- **Roles & demo auth:** Two roles — `HR` and `Employee`. A lightweight localStorage demo session (NOT the full auth module) drives access. Demo accounts (one HR + one Employee per department) live in `app/lib/compliance-demo.ts`; password is `Demo@123`. Session helpers: `getDemoSession` / `saveDemoSession` / `clearDemoSession`. Departments: `Sales`, `Compliance` (configs may target `All`).
+- **Key routes:**
+  - `app/routes/_index.tsx` → marketing landing page.
+  - `app/routes/login.tsx` → role/demo-account login (redirects HR→`/hr/dashboard`, Employee→`/employee/dashboard`).
+  - `app/routes/hr.dashboard.tsx` → HR console: scorecards, create/upload configs, browse configs + submissions, per-submission detail drawer with the AI verdict.
+  - `app/routes/employee.dashboard.tsx` → employee console: assigned configs + evidence submission (evidence note + file upload).
+  - `app/routes/judgment.*.tsx` → the underlying judgment module's own admin/report pages.
+- **Frontend ↔ backend boundary:** `app/lib/compliance-api.client.ts` is the single client wrapper. It maps the compliance UI onto the **judgment module** REST API (`/api/judgment/configs*`). Configs are judgment "configs"; submissions are judgment "submissions". Use this client from routes — do not call `/api/judgment/*` directly from components.
+- **Submission contract (IMPORTANT):** A submission sends `multipart/form-data` to `POST /api/judgment/configs/:configId/submit` with an `inputData` JSON field (employeeName, employeeEmail, department, evidenceText) plus file(s) under the field name **`files`** (the route uses `upload.array("files")` — sending `file` causes a Multer "Unexpected field" 500). There is intentionally **no quiz-score input** anywhere; the AI evaluates the uploaded file against the config criteria.
+- **Status & verdict:** Submission status is derived from the AI `verdict` (`pass`/`ready` → "Submitted", otherwise "Needs Review"), not from any numeric score. The AI result shape (verdict/score/confidence/severity/reason/fixSuggestion/...) is fixed — see `OUTPUT_SCHEMA` in `app/modules/judgment/judgment.seed.ts`.
+- **Seeded configs:** `app/modules/judgment/judgment.seed.ts` exports `seedJudgmentConfigs` (auto-discovered + run by `runSeeds()` on startup, idempotent upsert by `pluginId`). It seeds 5 compliance SOPs: AML, Anti-Fraud, Data Privacy (PDF-format checks), Sales Product License (format + expiry), SOP Acknowledgment (format + signature). To change which configs exist, edit `SEED_CONFIGS` there and restart the server.
+- **Theming:** Shared design tokens + brand chrome (the white-on-ink Allied logo card, eyebrow labels, status chips) live in `app/lib/compliance-theme.tsx` (`ComplianceThemeStyle`, `BrandMark`, `Chip`, `Eyebrow`, `AiTag`). The logo asset is `logo.png` (white, transparent) — render it on a dark/ink surface. Compliance pages are wrapped in a `.cmp` container that scopes the tokens.
+
 # Tech Stack
 - Framework: Remix (Vite plugin) + Express (Custom Server)
 - Language: TypeScript
@@ -9,7 +25,6 @@
 - State Management: React Hooks + local Context (ui-specific)
 - Styling: Tailwind CSS + shadcn/ui
 - Backend: Express + MongoDB (Mongoose & Typegoose)
-- Ensure Typegoose is in valid syntax.
 
 # Project Structure
 - `/app/api/` → Express backend operations (controllers, models, services, guards, and middleware).
