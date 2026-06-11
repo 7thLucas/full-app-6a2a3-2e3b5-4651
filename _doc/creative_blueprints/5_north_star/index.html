@@ -1,0 +1,104 @@
+<style>
+  .mode-landscape .sl-ns-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2.5rem 3rem; min-height: 100%; align-items: start; }
+  .mode-portrait .sl-ns-layout { display: flex; flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; min-height: 100%; }
+  .mode-landscape .sl-ns-wvo { grid-column: 1 / 2; }
+  .mode-landscape .sl-ns-value { grid-column: 2 / 3; }
+</style>
+<section class="w-full h-full overflow-auto bg-white">
+  <div class="sl-ns-layout">
+
+    <!-- Header — spans both columns in landscape -->
+    <div style="grid-column: 1 / -1;">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="text-xs font-bold tracking-widest uppercase" style="color:#0066CC;">North Star</span>
+        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold text-white" style="background-color:#0066CC;">Projected impact — based on your inputs</span>
+      </div>
+      <h1 class="text-3xl font-bold text-slate-900 leading-tight mb-1">Weekly Verified Compliance Operations</h1>
+      <p class="text-slate-500 text-base max-w-2xl">The single number this app lives or dies by: compliance documents submitted, validated, and logged — by real employees, every week.</p>
+    </div>
+
+    <!-- Left: WVO projection -->
+    <div class="sl-ns-wvo">
+      <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 mb-4">
+        <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Verified Operation</h2>
+        <div class="space-y-2 mb-5">
+          <div class="flex items-start gap-2">
+            <span class="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background-color:#0066CC;">1</span>
+            <p class="text-slate-700 text-sm"><strong>Compliance document submitted &amp; validated</strong> — employee uploads a required PDF or quiz score; rules engine validates against threshold and logs a timestamped record.</p>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background-color:#00A3E0;">2</span>
+            <p class="text-slate-700 text-sm"><strong>Compliance scorecard reviewed &amp; actioned</strong> — HR views an employee scorecard and takes an action (sends reminder, escalates, or marks resolved).</p>
+          </div>
+        </div>
+
+        <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">Weekly Volume — Formula</h2>
+        <div class="space-y-2 text-sm text-slate-700 bg-white rounded-xl border border-slate-200 p-4">
+          <div class="flex justify-between items-center">
+            <span>Employees — Sales dept.</span>
+            <span class="px-2 py-0.5 rounded text-xs font-semibold border" style="border-color:#f59e0b; color:#92400e; background:#fef3c7;">Assumption — adjust this: 25</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span>Employees — Compliance/Risk dept.</span>
+            <span class="px-2 py-0.5 rounded text-xs font-semibold border" style="border-color:#f59e0b; color:#92400e; background:#fef3c7;">Assumption — adjust this: 15</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span>Active submissions per employee / week</span>
+            <span class="px-2 py-0.5 rounded text-xs font-semibold border" style="border-color:#f59e0b; color:#92400e; background:#fef3c7;">Assumption — adjust this: 2</span>
+          </div>
+          <div class="border-t border-slate-200 pt-2 flex justify-between items-center font-semibold">
+            <span class="text-slate-800">40 employees × 2 submissions/wk</span>
+            <span style="color:#0066CC;" class="text-base font-bold">= 80 WVO / week</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-2xl border p-4 text-center" style="background-color:#0066CC;">
+        <p class="text-white/70 text-xs font-semibold uppercase tracking-widest mb-1">Your North Star</p>
+        <p class="text-white font-black text-4xl leading-none">80</p>
+        <p class="text-white/80 text-sm mt-1">verified compliance operations / week</p>
+      </div>
+    </div>
+
+    <!-- Right: Value & ROI -->
+    <div class="sl-ns-value space-y-4">
+      <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+        <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Value Per Operation</h2>
+        <div class="space-y-3 text-sm text-slate-700">
+          <div class="bg-white rounded-xl border border-slate-200 p-3">
+            <p class="font-semibold text-slate-800 mb-1">Time saved — HR chasing vs. automated</p>
+            <p class="text-slate-600">Manual follow-up per submission: <strong>~25 min</strong> → Automated: <strong>~3 min</strong></p>
+            <p class="text-slate-600">Net saved: <strong>22 min / operation</strong></p>
+          </div>
+          <div class="bg-white rounded-xl border border-slate-200 p-3">
+            <p class="font-semibold text-slate-800 mb-1">HR staff hourly rate</p>
+            <p class="text-slate-600"><span class="px-2 py-0.5 rounded text-xs font-semibold border" style="border-color:#f59e0b; color:#92400e; background:#fef3c7;">Assumption — adjust this: $45/hr</span></p>
+            <p class="text-slate-600 mt-1">22 min × $45/hr ÷ 60 = <strong>≈ $16.50 / operation</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+        <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Projected Total Value</h2>
+        <div class="space-y-3">
+          <div class="flex justify-between items-center bg-white rounded-xl border border-slate-200 px-4 py-3">
+            <span class="text-sm text-slate-600">80 WVO × $16.50</span>
+            <span class="font-bold text-slate-900">$1,320 / week</span>
+          </div>
+          <div class="flex justify-between items-center bg-white rounded-xl border border-slate-200 px-4 py-3">
+            <span class="text-sm text-slate-600">$1,320 × 52 weeks</span>
+            <span class="font-bold" style="color:#0066CC;">$68,640 / year</span>
+          </div>
+          <div class="rounded-xl p-4 text-center" style="background-color:#00A3E0;">
+            <p class="text-white/80 text-xs font-semibold uppercase tracking-widest mb-1">Projected Annual Value</p>
+            <p class="text-white font-black text-3xl leading-none">$68,640</p>
+            <p class="text-white/70 text-xs mt-1">in HR time recovered — before audit-risk and penalty avoidance</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-xs text-slate-400 leading-relaxed">All figures are projections derived from the assumptions above. Adjust the <span class="px-1 py-0.5 rounded border text-xs" style="border-color:#f59e0b; color:#92400e; background:#fef3c7;">amber chips</span> to match your actual headcount and rates.</p>
+    </div>
+
+  </div>
+</section>
